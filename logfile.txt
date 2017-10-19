@@ -1,0 +1,37 @@
+1. Implementiraj da superuser se brise celotne pollse. (DONE)
+
+2. Navaden user mora videt pollse iz splashScreana - vsaj objecti morajo bit pronti za pol (DONE)
+
+3B. Postelaj da je site nedosegljiv na notranje urlje ce user ni prijavljen (DONE)
+
+3. Sprogramiraj glasovanje. Imas count v vsakem objectu ki bo stel:
+   - Za neregistrirane userje (DONE).
+   - Za registrirane userje (DONE)
+
+4. Vizualiziraj prikaze (google charts al d3 al whateva)
+    - implenetiraj vizualizacijo v splash index (DONE)
+    - registered user view polls (DONE)
+    - registered user option polls (DONE)
+
+4B. Stiliziraj
+    - Navbar (DONE)
+    - postelaj vizualo (DONE)
+
+4C. Naredi se preverjanje, mamo session error in session success za henldat v INDEX.hbs (DONE)
+
+5. Za vsak poll ustvari link kjer NEPRIJAVLJEN user lahko glasuje (DONE)
+
+6. User se lahko registrira preko Twitterja, implementiraj TWITTER API torej
+
+6. cekiraj buge, 
+   -npm. da omejis logiranje (Done?),
+   -ko menjam password, se vedno fetcha v prazno chartse in me baci na splash screen
+   -ko menjam password, se vidi kaj pisem
+
+
+
+
+
+
+
+   

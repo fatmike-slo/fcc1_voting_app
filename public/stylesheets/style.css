@@ -1,0 +1,77 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+@media screen and (min-width: 977px)  {
+  .wrapper {
+    width: 960px;
+    margin: 0 auto;
+  }
+  .chart_div {
+    margin-left:-130px;
+  }
+}
+@media screen and (max-width: 767px)  {
+  .wrapper {
+    width: 350px;
+    margin: 0 auto;
+  }
+  .chart_div {
+    margin-left:-130px;
+  }
+}
+@media screen and (min-width: 768px)  {
+
+  .chart_div {
+    margin:0 auto;
+  }
+}
+/* disable link in header navbar right*/
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+#footer {
+  margin-top: 20px;
+}
+.container {
+  margin: 0 auto;
+}
+/*polls*/
+
+#createPollWrapper {
+  width: 50%;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#createPollWrapper>h3 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+#createPollWrapper>form>button {
+  width: initial;
+  margin-top: 10px;
+}
+
+#pollView {
+  width: initial;
+  float: right;
+}
+
+#pollDelete {
+  width: initial;
+  float: right;
+  margin-left: 10px;
+}
+
+
+/*error /signup*/
+
+section {
+  background: #FF8D8D;
+}

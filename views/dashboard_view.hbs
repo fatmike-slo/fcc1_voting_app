@@ -1,0 +1,65 @@
+
+
+{{> header}}
+<br>
+<br>
+<br>
+  <div class="container">
+    <!-- error messages -->
+        <div class="row" >
+
+            {{#if pollOptions}}<h2>Dashboard - </h2><h2 id="triggerOptionsButton">{{triggerOptions}}</h2>
+            {{else}}<h2 class="text-center">Dashboard</h2><h3 class="text-center">My threads</h3>
+            {{/if}}
+  
+            <!-- if just logged in -->
+            {{#if status}}
+                <p>You have logged successfully.</p>
+                <p>Welcome, {{username}}</p>
+            {{/if}}
+        </div>
+
+    <!-- get info from db and display polls, unregistered users -->
+        <i>Polls posted by </i><i style="text-align:center;" class="username">{{username}}</i>
+        <br>
+        <hr style="border: 1px solid #000">
+          {{#each pollDataView as |val key0|}}
+            <div style="background:#F8F8F8" class="row">
+                <div class="col-sm-4 col-md-3">
+                    <div class="row">
+                    <span style="font-size:0.7em">Posted on: {{this.date}}</span>
+                    </div>
+                    <div class="row">
+                    <h3>{{this.title}}</h3>
+                    </div>
+                    <div class="row">
+                    <h6>By: {{this.userId}}</h6>
+                    </div>
+                </div>
+                <div  class="col-sm-4 col-md-7">
+
+                  <form  action="/polls/vote/{{this._id}}" method="POST">
+                  {{#each this.polls as |val key|}}
+                  <div style="border-radius:5px; margin-bottom:10px; padding:8px; border:0.5px solid #DFDFDF;" class="row">
+                  <!-- od tle popravki -->
+                      <div class="col-sm-2 col-md-1"><input name="pollNumber" value={{key}} type="radio"></div>
+                      <div class="col-sm-8 col-md-10">{{this.poll}}</div>
+                      <div class="col-sm-2 col-md-1"><span class="badge">{{this.count}}</span></div>
+                  </div>
+                  
+                  {{/each}}
+                  <br>
+                  <button type="submit" class="btn btn-warning btn-sm" value="Vote">Vote</button>
+                  </form>
+                </div>
+                          <!-- charts -->
+                <div class="col-sm-4 col-md-2">
+                  <div id="chart_divOwn{{key0}}"></div>             
+                </div>
+            </div>
+              <br>
+              <hr>        
+          {{/each}}
+      </div>
+  </div>
+

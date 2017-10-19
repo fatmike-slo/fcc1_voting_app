@@ -1,0 +1,211 @@
+<!-- no need for wrapper as it is present in layout.hbs -->
+
+    {{>header}}
+    <div class="container">
+        <div class="row" >
+            {{#if pollOptions}}<h2 class="text-center">Dashboard</h2><h3 class="triggerOptionsButton"  class="text-center">{{triggerOptions}}</h3>
+            {{else}}<h2 class="text-center">Dashboard - Main</h2>
+            {{/if}}
+            {{#if userOptions}}<h2 class="text-center">Dashboard</h2><h3 class="triggerUserOptions"  class="text-center">{{userOptions}}</h3>
+            {{else}}<h2 class="text-center">Dashboard - Main</h2>
+            {{/if}}
+            {{#if deleteConfirm}}
+            <p>Poll Deleted Successfully</p>
+            {{/if}}
+            <!-- if just logged in -->
+            {{#if status}}
+                <p class="text-center">You have logged successfully.</p>
+                <p class="text-center">Welcome, {{username}}</p>
+            {{/if}}
+        </div>
+
+
+        <!-- if user in OPTIONS poll information -->
+        {{#if pollOptions}}
+        <p></p>
+        <i>Polls posted by </i><i style="text-align:center;" class="username">{{username}}</i>
+        <br>
+        <br>
+
+            {{#each pollDataOptionView as |val key0|}}
+            <br>
+            <hr style="border: 1px solid #000;">  
+            <br>    
+            <div class="row">
+                <div class="col-sm-12 col-md-2"></div>
+                <div class="col-sm-8 col-md-8">
+                    <h3 class="text-center">Title: <i>{{this.title}}</i>
+                </div>
+                <div class="col-sm-12 col-md-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
+                    <div class="text-center chart_div" id="chart_divOwn{{key0}}"></div> 
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6">
+                    <div class="row">
+                        <ul style="list-style:none;" class="text-center">
+                            <li>Poll id:<br><i>{{this._id}}</i></li>
+                            <br>
+                            <br>
+                            <li>Created on: <br><i>{{this.date}}</i></li>
+                        </ul>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <div class="row text-center">
+                        <!-- user delete poll (entire thread) -->
+                        <form method="POST" action="/polls/deletePoll/{{this._id}}">
+                            <button style="background:red;" type="submit" id="deleteButton"><span class="fa fa-trash fa-3x"></span></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 col-md-3 col-lg-3"></div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                {{#each this.polls as |val key|}}
+                    <div style="border-radius:5px; margin-bottom:10px; padding:8px; border:0.5px solid #DFDFDF;" class="row">
+                    <!-- od tle popravki -->
+                        <div class="col-sm-10 col-md-10">{{this.poll}}</div>
+                        <div class="col-sm-2 col-md-2"><span class="badge">{{this.count}}</span></div>
+                    </div>
+                {{/each}}
+                    <!-- user updates poll -->
+                    <form method="POST" action="/polls/newPoll/{{this._id}}">
+            
+                        <p><b>Create a new poll</b></p>
+                        <input type="text" size="14" name="pollToAdd" style="width:100%;"  maxlength="40" required>
+            
+                    <input style="padding:5px;" style="float:left"  type="submit" class="btn btn-default" value="Add to poll">
+                    </form>
+                    <span style="font-size:0.8em">40 characters max</span>
+                </div>          
+                <div class="col-sm-3 col-md-3 col-lg-3"></div>
+            </div>  
+            {{/each}}
+
+        {{/if}}
+
+
+        <!-- user OPTIONS -->
+        {{#if userOptions}} 
+            <div class="container">
+                <div class="row">
+                    <!-- error messages -->
+                    {{#if errors}}
+                    <div class="row">
+                    <section>
+                        <p>{{errors}}</p>  
+                    </section> 
+                    </div>
+                    {{/if}}
+                    {{#if invalidUserPass}}
+                    <div class="row"> 
+                    <section>
+                        <p>{{invalidUserPass}}</p>  
+                    </section> 
+                    </div>
+                    {{/if}}
+                </div>
+                {{#if success}} 
+                    <div class="row"> 
+                        <section class="success">
+                        <h2>Successfull Validation!</h2>
+                        </section>
+                        {{else}}
+                        {{#if error}} 
+                        <section>
+                        <h4>{{error}}</h4>
+                        </section>
+                        {{/if}}
+                        {{#if errors}}
+                        <section>
+                            <h4>Error when validating:</h4>
+                            <ul>
+                            {{#each errors}}
+                            <li>{{ this.msg }}</li>
+                            {{/each}}
+                            </ul>
+                        </section>
+                    {{/if}}
+                </div>
+                </div>
+            {{/if}}
+            <!-- end error messages -->
+            <!-- register form -->
+            <div class="container" >
+            <div class="row"> 
+            <h4><span class="signupCatcher">{{signup}}</span>{{title}}</h4>
+                <form action="/dashboard/userOptions/{{username}}" method="POST">
+                <p>Change password</p>
+                <div class="form-group">
+                    <label for="oldP">Old Password<i style="font-weight:lighter">(must be at least 3 charachters long):</i></label>
+                    <input type="oldPassword" class="form-control" id="oldP" name="oldPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="newP">New Password<i style="font-weight:lighter">(must be at least 3 charachters long):</i></label>
+                    <input type="newPassword" class="form-control" id="newP" name="newPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="cNP">Retype new password:</label>
+                    <input type="newPasswordConfirm" class="form-control" id="cNP" name="newPasswordConfirm" required>
+                </div>
+                <button type="submit" class="btn btn-default">Change</button>
+            </form> <!-- end register form -->
+                </div>
+            </div>
+        {{/if}}
+        <!-- view for change password confirmation -->
+        {{#if confirmChangePassword}}
+        <div class="row">
+            <div class="thumbnail">
+                <h2 class="text-center">Password successfully changed</h2>
+            </div>
+        </div>
+        {{/if}}     
+        <!-- end user options -->  
+
+
+        <!-- view and vote on all polls -->
+        {{#if splashView}}
+            {{#each unregData as |val key0|}}
+            <hr style="border: 0.5px solid #D8D8D8;">
+            
+            <div class="row">
+            <div class="col-xs-12 col-sm-3 col-md-3">
+                <div class="row">
+                    <span style="font-size:0.7em">Posted on: {{this.date}}</span>
+                </div>
+                <div class="row">
+                    <h3>{{this.title}}</h3>
+                </div>
+                <div class="row">
+                    <h6>By: {{this.userId}}</h6>
+                </div>
+            </div>
+            <div  class="col-xs-12 col-sm-6 col-md-7">
+                <form  action="/polls/vote/registrated/{{this._id}}" method="POST">
+                    {{#each this.polls as |val key|}}
+                    <div style="border-radius:5px; margin-bottom:10px; padding:8px; border:0.5px solid #DFDFDF;" class="row">
+                    <!-- od tle popravki -->
+                        <div class="col-sm-2 col-md-1"><input name="pollNumber" value={{key}} type="radio" required></div>
+                        <div class="col-sm-8 col-md-10">{{this.poll}}</div>
+                        <div class="col-sm-2 col-md-1"><span class="badge">{{this.count}}</span></div>
+                    </div>
+                
+                    {{/each}}
+                    <br>
+                    <button type="submit" class="btn btn-warning btn-sm" value="Vote">Vote</button>
+                </form>
+            </div>
+          <!-- view charts -->
+                <div class="col-xs-12 col-sm-3 col-md-2">
+                    <div style="margin-left:-30px;" id="chart_div{{key0}}"></div>
+                </div>
+            </div>
+            <br>
+            {{/each}}
+        {{/if}} 
+    </div>

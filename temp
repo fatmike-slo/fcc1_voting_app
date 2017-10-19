@@ -1,0 +1,70 @@
+ $(document).ready(() => {
+
+     let holder;
+     // perform xmlhttpreq
+     var oReq = new XMLHttpRequest();
+     oReq.addEventListener("load", reqListener);
+     oReq.open("GET", "/polls/getDataCharts");
+     oReq.send();
+
+     // callback function for when data is loaded
+     function reqListener() {
+         let drawArr = [];
+         let nameArr = [];
+         let countArr = [];
+         let titleArr = [];
+         let titleObj;
+         holder = JSON.parse(this.responseText);
+
+         console.log('lopamo prva poteza,', holder);
+
+         holder.forEach((item, index) => {
+             titleObj = {
+                 "title": item.title,
+                 "width": 300,
+                 "height": 200
+             }
+             rowsArr = [];
+             item.polls.forEach((item2, index2)=> {
+                 rowsArr.push(item2.poll, item2.count);
+                });
+                console.log(rowsArr);
+       
+             // title for chart
+             titleArr.push(titleObj);
+
+             function drawChart() {
+
+                 // Create the data table.
+                 var data = new google.visualization.DataTable();
+                 data.addColumn('string', 'Topping');
+                 data.addColumn('number', 'Slices');
+                console.log('poll', item.polls);
+                
+                
+
+
+                 data.addRows([
+                     [item.polls[0].poll, item.polls[0].count],
+                     [item.polls[1].poll, 3]
+                 ]);
+                 // Instantiate and draw our chart, passing in some options.
+                 let chart = new google.visualization.PieChart(document.getElementById('chart_div' + index.toString()))
+                 // Set chart options
+                 var options = {
+                     'title': item.title,
+                     'width': 300,
+                     'height': 200
+                    };
+                    chart.draw(data, options);
+                 // let options = JSON.stringify(titleObj);
+
+             }
+             // callback for google charts 
+             google.charts.setOnLoadCallback(drawChart);
+
+         });
+     }
+ });
+
+

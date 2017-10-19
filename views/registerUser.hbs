@@ -1,0 +1,53 @@
+{{#if signup}} 
+          <!-- signup menu -->
+          <div class="container">
+                <!-- error messages -->
+              <div class="row"> 
+              {{#if errors}}
+              <section>
+                <h4>Error when validating:</h4>
+                <ul>
+                  {{#if duplicateFound}}
+                    {{#each errors}}
+                      <li>{{this}}</li>
+                    {{/each}}
+                  {{else}}
+                    {{#each errors}}
+                      <li>{{ this.msg }}</li>
+                    {{/each}}
+                  {{/if}}
+                </ul>
+              </section>
+              {{/if}}
+              </div>
+            </div>
+          <!-- end error messages -->
+
+       
+    <!-- register form -->
+  <div class="container" >
+    <div class="row"> 
+    <h4><span class="signupCatcher">{{signup}}</span>{{title}}</h4>
+      <form action="/signup/new/" method="POST">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input  class="form-control" id="username" name="username">
+        </div>
+        <div class="form-group">
+          <label for="email">Email <i style="font-weight:lighter">(requires a valid email):</i></label>
+          <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="form-group">
+          <label for="pwd">Password <i style="font-weight:lighter">(must be at least 3 charachters long):</i></label>
+          <input type="password" class="form-control" id="pwd" name="password">
+        </div>
+        <div class="form-group">
+          <label for="confirmPwd">Retype password:</label>
+          <input type="password" class="form-control" id="confirmPwd" name="confirmPassword">
+        </div>
+      <button type="submit" class="btn btn-default">Register</button>
+    </form> <!-- end register form -->
+    <!-- end signup menu -->  
+      </div>
+    </div>
+{{/if}}

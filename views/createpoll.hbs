@@ -1,0 +1,49 @@
+{{>header}}
+<div id="createPollWrapper">
+    <br>
+    <br>
+    <br>
+    <br>
+    <h3>{{title}}</h3>
+    <form action="/polls/create" method="POST">
+        <div class="input-group">
+            <span class="input-group-addon">Poll title:&nbsp;</span>
+            <input name="pollTitle" type="text" class="form-control" placeholder="Which is more appealing to you?" aria-describedby="basic-addon1" required>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">Choice 1</span>
+            <input name="choice1" type="text" class="form-control" placeholder="F-16" aria-label="Amount (to the nearest dollar)" required>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">Choice 2</span>
+            <input name="choice2" type="text" class="form-control" placeholder="Su-27" aria-describedby="basic-addon3" required>
+        </div>
+        <button type="submit" id="pollCreate" class="btn btn-success"><a href="/dashboard/{{username}}"></a>Create new poll</button>
+    </form>
+
+    <!-- hardcoded, have to fetch and loop to hide them, or better make a switch when in createpoll.hbs -->
+    <div style="display:none" id="chart_div0"></div>
+    <div style="display:none" id="chart_div1"></div>
+    <div style="display:none" id="chart_div2"></div>
+    <div style="display:none" id="chart_div3"></div>
+    <div style="display:none" id="chart_div4"></div>
+    <div style="display:none" id="chart_div5"></div>
+    <div style="display:none" id="chart_div6"></div>
+    <div style="display:none" id="chart_div7"></div>
+    <div style="display:none" id="chart_div8"></div>
+    <div style="display:none" id="chart_div9"></div>
+    <div style="display:none" id="chart_div10"></div>
+    <div style="display:none" id="chart_div11"></div>
+    <div style="display:none" id="chart_div12"></div>
+    <div style="display:none" id="chart_div13"></div>
+    <div style="display:none" id="chart_div14"></div>
+    <div style="display:none" id="chart_div15"></div>
+    <div style="display:none" id="chart_div16"></div>
+    <div style="display:none" id="chart_div17"></div>
+    <div style="display:none" id="chart_div18"></div>
+    <div style="display:none" id="chart_div19"></div>
+    <div style="display:none" id="chart_div20"></div>
+    <div style="display:none" id="chart_div21"></div>
+
+
+

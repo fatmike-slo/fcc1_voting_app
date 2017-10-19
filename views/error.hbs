@@ -1,0 +1,13 @@
+<h1>Error, login failed</h1>
+<p>Baci pac to</p>
+<!-- direct url connection to /dashboard -->
+{{#if urlError}}
+    <h3>You have to register to access the dashboard</h3>
+    <p> <a href="{{registerUrl}}">Register here</a></p>
+{{/if}}
+
+<!-- log in errors -->
+<h2>{{message}}</h2>
+<h2>{{error.status}}</h2>
+<pre>{{error.stack}}</pre>
+{{>footer}}
